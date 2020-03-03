@@ -3,9 +3,11 @@ class Area extends Component {
     constructor(props){
         super(props);
         const area = localStorage.getItem('area');
+        const eventData = localStorage.getItem('eventData');
         this.state = {
             dialogue: '',
             area: area,
+            eventData: eventData,
         };
     }
 
@@ -36,7 +38,6 @@ class Area extends Component {
         this.resetDialogue();
         localStorage.setItem('area',theArea);
         this.setState({area: theArea});
-
     }
 
     home(){
@@ -70,10 +71,40 @@ class Area extends Component {
         </div>
     }
 
+    events(data, value) {
+        this.resetDialogue();
+        let event = this.state.eventData;
+        event = JSON.parse(event);
+        event[data] = value;
+        event = JSON.stringify(event);
+        localStorage.setItem('eventData', event);
+        this.setState({eventData: event});
+    }
+
     garden(){
         const self = this;
+        let event = this.state.eventData;
+        event = JSON.parse(event);
+
         function flowers() {
-            self.setDialogue(<div>Beautiful roses and trees.<br/></div>);
+            if (!event["flowers"]) {
+                self.events("flowers", 0);
+                self.setDialogue(<div>Your flowers seem to be thirsty. Would you like to give them some water ?<br/>
+                    <button onClick={() => self.events("flowers", 1)}>Water the plants</button>
+                </div>);
+            }
+            if (event["flowers"] === 0) {
+                self.setDialogue(<div>Your flowers seem to be thirsty. Would you like to give them some water ?<br/>
+                    <button onClick={() => self.events("flowers", 1)}>Water the plants</button>
+                </div>);
+            } else if (event["flowers"] === 1) {
+                self.setDialogue(<div>Your flowers are absolutely perfect ! Do you want to kill them ?<br/>
+                    <button onClick={() => self.events("flowers", 2)}>Water the plants until they die</button>
+                </div>);
+            } else if (event["flowers"] > 1) {
+                self.setDialogue(<div>Your flowers are dead. You drowned them. You were never a good gardener.<br/>
+                </div>);
+            }
         }
 
         function exit() {
@@ -91,7 +122,6 @@ class Area extends Component {
 
     forest(){
         const self = this;
-
 
     }
 

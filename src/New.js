@@ -31,6 +31,7 @@ class New extends Component {
                 if(!localStorage.getItem('playerData')) {
                     data = newData;
                     localStorage.setItem('playerData',data.toString());
+                    localStorage.setItem('eventData', '{}');
                 }
                 alert("Your character has been created successfully. Welcome to our world, "+nom+" ! ♥");
                 window.location.reload(true);
