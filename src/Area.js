@@ -17,9 +17,13 @@ class Area extends Component {
     setDialogue(dialogue){
         this.setState({
             dialogue: <div><div className="dialogue">{dialogue}</div>
-                <button className="dialogue-button" id="close" onClick={() => this.resetDialogue()}>X</button>
+                {this.getCloseButton()}
             </div>
         })
+    }
+
+    getCloseButton() {
+        return <button className="dialogue-button" id="close" onClick={() => this.resetDialogue()}>X</button>;
     }
 
     setNPCDialogue(npc, dialogue) {
@@ -226,7 +230,8 @@ class Area extends Component {
                             world !<br/>
 
                             <button
-                                onClick={() => self.setNPCDialogue(<div>I knew it ! You're pawsome ! Anyway, meet me in
+                                onClick={() => self.setNPCDialogue("Magimiu", <div>I knew it ! You're pawsome ! Anyway,
+                                    meet me in
                                     the forest ! <br/>
                                     I'll be waiting for you ! And you'd better come. Don't make me wait...
                                     <button onClick={() => self.setDialogue(<div>She smiles at you before running to the
@@ -235,7 +240,7 @@ class Area extends Component {
                                     </div>)}>Next</button>
                                 </div>)}>Yes
                             </button>
-                            <button onClick={() => self.setNPCDialogue(<div>What do you mean NO !? <br/>
+                            <button onClick={() => self.setNPCDialogue("Magimiu", <div>What do you mean NO !? <br/>
                                 <button
                                     onClick={() => self.setDialogue(<div>She takes her magical staff and starts meowing
                                         weird words. <br/>
@@ -244,6 +249,7 @@ class Area extends Component {
                                             onClick={() => self.setNPCDialogue("Magimiu", <div>Of course you'll help !
                                                 Anyway, meet me in the forest ! <br/>
                                                 I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                                {self.getCloseButton()}
                                             </div>)}>Yes, Master.
                                         </button>
                                     </div>)}>Next
@@ -258,17 +264,20 @@ class Area extends Component {
             }
         }
 
-        if (event["Magimiu"] === 2) {
-            self.setDialogue(<div>You arrived at Cat City. <br/>
-                It's a beautiful place where most of the Catizen live. You can see markets, the huge castle,
-                schools<br/>
-                Basically everything a city needs.<br/>
-                <button onClick={() => nextDia()}>Next</button>
-            </div>);
+        function checkEvent() {
+            if (event["Magimiu"] < 2) {
+                self.setDialogue(<div>You arrived at Cat City. <br/>
+                    It's a beautiful place where most of the Catizen live. You can see markets, the huge castle,
+                    schools<br/>
+                    Basically everything a city needs.<br/>
+                    <button onClick={() => nextDia()}>Next</button>
+                </div>);
+            }
         }
 
         return <div className="home">
             {this.state.dialogue}
+            <button onClick={checkEvent}/>
             <button onClick={() => self.goToArea('forest')}>Forest near {this.props.name}'s House</button>
         </div>
     }
