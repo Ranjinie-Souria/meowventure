@@ -4,12 +4,11 @@ import New from "./New";
 import Game from "./Game";
 
 function getGame() {
-  if(!localStorage.getItem('playerData')) {
-    return <New/>;
+  if (localStorage.getItem('playerData')) {
+    return <Game/>;
   }
   else {
-    console.log('data found');
-    return <Game/>
+    return <New/>
   }
 
 }
