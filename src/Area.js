@@ -161,6 +161,7 @@ class Area extends Component {
         function grassField() {
             function talk() {
                 if (event["Magimiu"] === 0) {
+                    self.events("Magimiu", 1);
                     self.setNPCDialogue('Magimiu',
                         <div>Hello ! You are {self.props.name}, right ? <br/>
                             I saw your house ! It's so pretty.
@@ -211,6 +212,61 @@ class Area extends Component {
 
     catcity() {
         const self = this;
+        let event = JSON.parse(this.state.eventData);
+
+        function nextDia() {
+            if (event["Magimiu"] === 1) {
+
+                self.setDialogue(<div>As you keep on walking, you recognize Magimiu. <br/> She looks at you,
+                    excited.<br/>
+
+                    <button onClick={() =>
+                        self.setNPCDialogue("Magimiu", <div>Hey ! It's you again !
+                            Are you looking for a job ? <br/>Please say yes. I need your help. It's about the end of the
+                            world !<br/>
+
+                            <button
+                                onClick={() => self.setNPCDialogue(<div>I knew it ! You're pawsome ! Anyway, meet me in
+                                    the forest ! <br/>
+                                    I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                    <button onClick={() => self.setDialogue(<div>She smiles at you before running to the
+                                        forest. <br/>
+                                        Well. At least you can earn money now.<br/>
+                                    </div>)}>Next</button>
+                                </div>)}>Yes
+                            </button>
+                            <button onClick={() => self.setNPCDialogue(<div>What do you mean NO !? <br/>
+                                <button
+                                    onClick={() => self.setDialogue(<div>She takes her magical staff and starts meowing
+                                        weird words. <br/>
+                                        She smiles at you.<br/>
+                                        <button
+                                            onClick={() => self.setNPCDialogue("Magimiu", <div>Of course you'll help !
+                                                Anyway, meet me in the forest ! <br/>
+                                                I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                            </div>)}>Yes, Master.
+                                        </button>
+                                    </div>)}>Next
+                                </button>
+                            </div>)}>No
+                            </button>
+
+
+                        </div>)}>Next
+                    </button>
+                </div>);
+            }
+        }
+
+        if (event["Magimiu"] === 2) {
+            self.setDialogue(<div>You arrived at Cat City. <br/>
+                It's a beautiful place where most of the Catizen live. You can see markets, the huge castle,
+                schools<br/>
+                Basically everything a city needs.<br/>
+                <button onClick={() => nextDia()}>Next</button>
+            </div>);
+        }
+
         return <div className="home">
             {this.state.dialogue}
             <button onClick={() => self.goToArea('forest')}>Forest near {this.props.name}'s House</button>
