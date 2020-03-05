@@ -93,9 +93,13 @@ class Area extends Component {
     }
 
     events(data, value) {
-        this.resetDialogue();
         let event = this.state.eventData;
-        event = JSON.parse(event);
+        this.resetDialogue();
+        if (this.state.eventData) {
+            event = JSON.parse(event);
+        } else {
+            event = {};
+        }
         event[data] = value;
         event = JSON.stringify(event);
         localStorage.setItem('eventData', event);
@@ -219,7 +223,7 @@ class Area extends Component {
         let event = JSON.parse(this.state.eventData);
 
         function nextDia() {
-            if (event["Magimiu"] === 1) {
+            if (event["Magimiu"] === 1 || event["Magimiu"] === undefined) {
 
                 self.setDialogue(<div>As you keep on walking, you recognize Magimiu. <br/> She looks at you,
                     excited.<br/>
@@ -237,6 +241,7 @@ class Area extends Component {
                                     <button onClick={() => self.setDialogue(<div>She smiles at you before running to the
                                         forest. <br/>
                                         Well. At least you can earn money now.<br/>
+                                        {self.events("Magimiu", 2)}
                                     </div>)}>Next</button>
                                 </div>)}>Yes
                             </button>
@@ -249,6 +254,7 @@ class Area extends Component {
                                             onClick={() => self.setNPCDialogue("Magimiu", <div>Of course you'll help !
                                                 Anyway, meet me in the forest ! <br/>
                                                 I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                                {self.events("Magimiu", 2)}
                                                 {self.getCloseButton()}
                                             </div>)}>Yes, Master.
                                         </button>
@@ -265,7 +271,7 @@ class Area extends Component {
         }
 
         function checkEvent() {
-            if (event["Magimiu"] < 2) {
+            if (event["Magimiu"] < 2 || event["Magimiu"] === undefined) {
                 self.setDialogue(<div>You arrived at Cat City. <br/>
                     It's a beautiful place where most of the Catizen live. You can see markets, the huge castle,
                     schools<br/>
@@ -282,9 +288,17 @@ class Area extends Component {
         </div>
     }
 
+    checkEventData() {
+        if (this.state.eventData) {
+            return this.getArea();
+        } else {
+            localStorage.setItem('eventData', '{}');
+        }
+    }
+
 
     render() {
-        return this.getArea();
+        return this.checkEventData();
     }
 
 
