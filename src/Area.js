@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Home from "./Home";
+import Garden from "./Garden";
 
 class Area extends Component {
     constructor(props) {
@@ -18,13 +19,21 @@ class Area extends Component {
     }
 
     getChildDialogue = (childData) => {
-        this.setDialogue(childData);
-
+        if (childData !== '') {
+            this.setDialogue(childData);
+        } else {
+            this.resetDialogue();
+        }
     };
     getChildArea = (childData) => {
         this.resetDialogue();
         this.setState({area: childData});
         localStorage.setItem('area', childData);
+    };
+
+
+    setChildEvent = (childData) => {
+        this.setState({eventData: childData});
     };
 
     noEvent() {
@@ -66,15 +75,17 @@ class Area extends Component {
         const area = this.state.area;
         if (!area) {
             localStorage.setItem('area', 'home');
-            return <div className="home">{this.getDialogue()}<Home childDialogue={this.getChildDialogue}
-                                                                   childArea={this.getChildArea}
-                                                                   noEvent={this.noEvent}/></div>;
-        } else if (area === 'home') {
+        }
+        if (area === 'home' || !area) {
             return <div className="home">{this.getDialogue()}<Home childDialogue={this.getChildDialogue}
                                                                    childArea={this.getChildArea}
                                                                    noEvent={this.noEvent}/></div>;
         } else if (area === 'garden') {
-            return this.garden();
+            return <div className="home">{this.getDialogue()}<Garden childDialogue={this.getChildDialogue}
+                                                                     eventData={this.state.eventData}
+                                                                     childArea={this.getChildArea}
+                                                                     childEvent={this.setChildEvent}
+                                                                     noEvent={this.noEvent}/></div>;
         } else if (area === 'forest') {
             return this.forest();
         } else if (area === 'catcity') {
@@ -87,7 +98,6 @@ class Area extends Component {
         localStorage.setItem('area', theArea);
         this.setState({area: theArea});
     }
-
 
     events(data, value) {
         let event = this.state.eventData;
@@ -103,46 +113,6 @@ class Area extends Component {
         this.setState({eventData: event});
     }
 
-    garden() {
-        const self = this;
-        let event = this.state.eventData;
-        event = JSON.parse(event);
-
-        function flowers() {
-            if (!event["flowers"]) {
-                self.events("flowers", 0);
-                self.setDialogue(<div>Your flowers seem to be thirsty. Would you like to give them some water ?<br/>
-                    <button onClick={() => self.events("flowers", 1)}>Water the plants</button>
-                </div>);
-            }
-            if (event["flowers"] === 0) {
-                self.setDialogue(<div>Your flowers seem to be thirsty. Would you like to give them some water ?<br/>
-                    <button onClick={() => self.events("flowers", 1)}>Water the plants</button>
-                </div>);
-            } else if (event["flowers"] === 1) {
-                self.setDialogue(<div>Your flowers are absolutely perfect ! Do you want to kill them ?<br/>
-                    <button onClick={() => self.events("flowers", 2)}>Water the plants until they die</button>
-                </div>);
-            } else if (event["flowers"] > 1) {
-                self.setDialogue(<div>Your flowers are dead. You drowned them. You were never a good gardener.<br/>
-                </div>);
-            }
-        }
-
-        function exit() {
-            self.setDialogue(<div>This path leads to the forest. Cat City is not so far away from it. <br/>
-                Do you want to leave your garden ?<br/>
-                <button onClick={() => self.goToArea('forest')}>Leave the garden</button>
-            </div>);
-        }
-
-        return <div className="home">
-            {this.state.dialogue}
-            <button onClick={() => self.goToArea('home')}>Home</button>
-            <button onClick={() => flowers()}>Flowers</button>
-            <button onClick={() => exit()}>Forest</button>
-        </div>
-    }
 
     forest() {
         const self = this;
