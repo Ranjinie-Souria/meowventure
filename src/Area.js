@@ -1,6 +1,7 @@
 import React, {Component} from "react";
+
 class Area extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         const area = localStorage.getItem('area');
         const eventData = localStorage.getItem('eventData');
@@ -11,12 +12,14 @@ class Area extends Component {
         };
     }
 
-    resetDialogue(){
+    resetDialogue() {
         this.setState({dialogue: ''});
     }
-    setDialogue(dialogue){
+
+    setDialogue(dialogue) {
         this.setState({
-            dialogue: <div><div className="dialogue">{dialogue}</div>
+            dialogue: <div>
+                <div className="dialogue">{dialogue}</div>
                 {this.getCloseButton()}
             </div>
         })
@@ -32,16 +35,14 @@ class Area extends Component {
         })
     }
 
-    getArea(){
+    getArea() {
         const area = this.state.area;
-        if (!area){
-            localStorage.setItem('area','home');
+        if (!area) {
+            localStorage.setItem('area', 'home');
             return this.home();
-        }
-        else if (area === 'home'){
+        } else if (area === 'home') {
             return this.home();
-        }
-        else if (area === 'garden'){
+        } else if (area === 'garden') {
             return this.garden();
         } else if (area === 'forest') {
             return this.forest();
@@ -50,20 +51,23 @@ class Area extends Component {
         }
     }
 
-    goToArea(theArea){
+    goToArea(theArea) {
         this.resetDialogue();
-        localStorage.setItem('area',theArea);
+        localStorage.setItem('area', theArea);
         this.setState({area: theArea});
     }
 
-    home(){
+    home() {
         const self = this;
+
         function bed() {
             let count = 1;
             self.setDialogue(<div>Your comfy bed, it smells just like you. <br/>Maybe you don't actually smell good but,
                 for some reason, <br/>
                 your bed is very appealing. Looking at it makes you want to take a nap.<br/>
-            <button onClick={() => nap()}>Take a little nap</button></div>);
+                <button onClick={() => nap()}>Take a little nap</button>
+            </div>);
+
             function nap() {
                 if (count < 5) {
                     count += 1;
@@ -71,8 +75,7 @@ class Area extends Component {
                         That's what you said after having {count} delicious hours of sleep. <br/>
                         Do you want to sleep more ?
                         <button onClick={() => nap()}>Sleep more</button></div>)
-                }
-                else {
+                } else {
                     self.setDialogue(<div>You took {count} hours of naps. I think that's enough. <br/>
                         Don't you feel like going outside ? No ? Well that's up to you.</div>)
                 }
@@ -81,11 +84,13 @@ class Area extends Component {
 
         function exit() {
             self.setDialogue(<div>The exit door. Do you want to leave your home ?<br/>
-                <button onClick={() => self.goToArea('garden')}>Leave home</button></div>);
+                <button onClick={() => self.goToArea('garden')}>Leave home</button>
+            </div>);
         }
 
         return <div className="home">
             {this.state.dialogue}
+            <button onClick={() => self.noEvent()}>Check the area</button>
             <button onClick={() => bed()}>Bed</button>
             <button onClick={() => exit()}>Door</button>
 
@@ -106,7 +111,7 @@ class Area extends Component {
         this.setState({eventData: event});
     }
 
-    garden(){
+    garden() {
         const self = this;
         let event = this.state.eventData;
         event = JSON.parse(event);
@@ -147,7 +152,7 @@ class Area extends Component {
         </div>
     }
 
-    forest(){
+    forest() {
         const self = this;
         let event = this.state.eventData;
         event = JSON.parse(event);
@@ -191,11 +196,119 @@ class Area extends Component {
                 }
             }
 
+
             if (event["Magimiu"] === 0) {
                 self.setDialogue(<div>A huge field of grass. <br/>
                     You thought there wouldn't be anything here but you see a Catizen looking at you.
                     <br/> She seems to be a Mage according to her clothes.
                     <button onClick={() => talk()}>Talk to her</button></div>);
+            }
+
+            if (event["Magimiu"] === 2) {
+                self.setNPCDialogue("Magimiu", <div>I've been waiting for SO long ! <br/>
+                    Come faster !
+
+                    <button onClick={() =>
+
+                        self.setDialogue(
+                            <div>The grass field smells really good today. Oh, seems like it's not only the grass'
+                                smell. <br/>
+                                Magimiu put a delicious looking chocolate cake on a trunk of a tree. <br/> Was that
+                                trunk always here ? Well, it's not like you care right.<br/>
+
+                                <button onClick={() =>
+                                    self.setNPCDialogue("Magimiu", <div>Okay so, first of all I need to explain you the
+                                        lore. Wait a minute. <br/>
+                                        <button onClick={() =>
+                                            self.setDialogue(<div>She takes a book out of her hat, you can read "Script"
+                                                written on the cover.<br/>
+                                                Haha. Does she thinks that we're living in a simulation ?
+
+                                                <button onClick={() =>
+                                                    self.setNPCDialogue("Magimiu", <div>Alright. So, basically, there is
+                                                        a bad guy, we are the good guys, and we need to win ! <br/>
+                                                        Now, kill this cake ! Come on ! It's the training ! Actually you
+                                                        don't HAVE to kill it.<br/> Just do what your soul tells you to
+                                                        do.
+                                                        <button onClick={() =>
+                                                            self.setDialogue(
+                                                                <div>Yes. You are against any kind of physical abuse
+                                                                    made to cake.<br/> Actually, you don't even like
+                                                                    chocolate.<br/>
+                                                                    And chocolate is harmful for cats. Good
+                                                                    decision, {self.props.name}.<br/>
+                                                                    You show your paws to Magimiu. Why are you doing
+                                                                    this ? <br/> No one knows. Except you, of course.
+                                                                    <button onClick={() =>
+                                                                        self.setNPCDialogue("Magimiu", <div>
+                                                                            Wow... Your paws... They are so...
+                                                                            Hypnotizing.
+                                                                            You are truly remarkable, {self.props.name}.<br/>
+                                                                            <button onClick={() =>
+                                                                                self.setDialogue(
+                                                                                    <div>Magimiu blushes. She is really
+                                                                                        interested in your
+                                                                                        paws.<br/> Good job !
+
+                                                                                    </div>)}>Next
+                                                                            </button>
+                                                                        </div>)}>Look at my paws.</button>
+                                                                </div>)}>Sorry I am strongly against physical abuse to
+                                                            cakes. I will proceed to show you my paws.</button>
+
+                                                        <button onClick={() =>
+                                                            self.setDialogue(<div>
+                                                                You look at the cake. The delicious smell of chocolate
+                                                                and cream attracts you.<br/>
+                                                                You proceed to eat the whole cake. Its sweet taste makes
+                                                                you shiver from pleasure.<br/>
+                                                                What a delicious treat !
+
+                                                                <button onClick={() => self.setNPCDialogue("Magimiu",
+                                                                    <div>I... Asked you to kill it. NOT TO EAT IT !<br/>
+                                                                        And that cake was pretty expensive ! Please
+                                                                        !<br/>
+
+                                                                        <button
+                                                                            onClick={() => self.setNPCDialogue("Magimiu",
+                                                                                <div>
+                                                                                    Do you eat your enemies ?
+                                                                                    <button
+                                                                                        onClick={() => self.setNPCDialogue("Magimiu",
+                                                                                            <div>
+                                                                                                Of course you don't
+                                                                                                !<br/> Uh... Wait...
+                                                                                                What did you just
+                                                                                                say...?<br/>
+                                                                                                Uh. Anyway... Let's move
+                                                                                                on.
+                                                                                            </div>)}>Yes</button>
+                                                                                    <button onClick={() =>
+                                                                                        self.setNPCDialogue("Magimiu",
+                                                                                            <div>
+                                                                                                Of course you don't !
+                                                                                            </div>)}>No
+                                                                                    </button>
+
+                                                                                </div>)}>Why would you rather kill it
+                                                                            than eat it ?
+                                                                        </button>
+                                                                    </div>)}>Next</button>
+
+                                                            </div>)}>Why kill the cake when we can just eat it ?
+                                                        </button>
+
+
+                                                    </div>)}>Next</button>
+
+
+                                            </div>)}>Next
+                                        </button>
+
+                                    </div>)}>What are we doing here ?
+                                </button>
+
+                            </div>)}>Yes, calm down.</button></div>);
             } else {
                 self.setDialogue(<div>A huge field of grass. <br/>
                     There's nothing here, except bugs, and other tiny stuff that you can't see.<br/></div>);
@@ -209,8 +322,20 @@ class Area extends Component {
             </div>);
         }
 
+        function eventList() {
+            if (event["Magimiu"] === 0 || event["Magimiu"] === 2) {
+                self.setDialogue(<div>You can see a weird grass path not so far away.<br/>
+                    You also hear noises in that direction<br/>
+                    <button onClick={() => grassField()}>Follow the grass path</button>
+                </div>);
+            } else {
+                self.noEvent()
+            }
+        }
+
         return <div className="home">
             {this.state.dialogue}
+            <button onClick={() => eventList()}>Check the area</button>
             <button onClick={() => self.goToArea('garden')}>{this.props.name}'s House</button>
             <button onClick={() => trees()}>Trees</button>
             <button onClick={() => grassPath()}>Grass path</button>
@@ -223,7 +348,7 @@ class Area extends Component {
         let event = JSON.parse(this.state.eventData);
 
         function nextDia() {
-            if (event["Magimiu"] === 1 || event["Magimiu"] === undefined) {
+            if (event["Magimiu"] === 1) {
 
                 self.setDialogue(<div>As you keep on walking, you recognize Magimiu. <br/> She looks at you,
                     excited.<br/>
@@ -267,25 +392,75 @@ class Area extends Component {
                         </div>)}>Next
                     </button>
                 </div>);
+            } else if (event["Magimiu"] === 0 || event["Magimiu"] === undefined) {
+                self.setDialogue(<div>As you keep on walking, you see a weird Catizen. <br/> She seems to be a Mage
+                    according to her clothes.<br/>
+                    <button onClick={() =>
+                        self.setNPCDialogue("Magimiu", <div>CATIZENS ! Help save the world ! Hey you here !
+                            Are you looking for a job ? <br/>Please say yes. I need your help. It's about the end of the
+                            world !<br/>
+                            <button
+                                onClick={() => self.setNPCDialogue("Magimiu", <div>Yes young catizen !<br/> My magic
+                                    detects that your name is...
+                                    {self.props.name} ! Okay, to be honest I've read it somewhere.<br/> Anyway, meet me
+                                    in the forest ! <br/>
+                                    I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                    <button onClick={() => self.setDialogue(<div>She smiles at you before running to the
+                                        forest. <br/>
+                                        Well. At least you can earn money now.<br/>
+                                        {self.events("Magimiu", 2)}
+                                    </div>)}>Next</button>
+                                </div>)}>Yes
+                            </button>
+                            <button onClick={() => self.setNPCDialogue("Magimiu", <div>What do you mean NO !? <br/>
+                                <button
+                                    onClick={() => self.setDialogue(<div>She takes her magical staff and starts meowing
+                                        weird words. <br/>
+                                        She smiles at you.<br/>
+                                        <button
+                                            onClick={() => self.setNPCDialogue("Magimiu", <div>Of course you'll help !
+                                                <br/> My magic detects that your name is...
+                                                {self.props.name} ! Okay, to be honest I've read it somewhere.<br/>
+                                                Anyway, meet me in the forest ! <br/>
+                                                I'll be waiting for you ! And you'd better come. Don't make me wait...
+                                                {self.events("Magimiu", 2)}
+                                                {self.getCloseButton()}
+                                            </div>)}>Yes, Master.
+                                        </button>
+                                    </div>)}>Next
+                                </button>
+                            </div>)}>No
+                            </button>
+
+
+                        </div>)}>Next
+                    </button>
+                </div>);
             }
         }
 
-        function checkEvent() {
+        function eventList() {
             if (event["Magimiu"] < 2 || event["Magimiu"] === undefined) {
                 self.setDialogue(<div>You arrived at Cat City. <br/>
-                    It's a beautiful place where most of the Catizen live. You can see markets, the huge castle,
-                    schools<br/>
+                    It's a beautiful place where most of the Catizen live. <br/>You can see markets, the huge castle,
+                    schools...<br/>
                     Basically everything a city needs.<br/>
                     <button onClick={() => nextDia()}>Next</button>
                 </div>);
+            } else {
+                self.noEvent();
             }
         }
 
         return <div className="home">
             {this.state.dialogue}
-            <button onClick={checkEvent}/>
+            <button onClick={eventList}>Check the area</button>
             <button onClick={() => self.goToArea('forest')}>Forest near {this.props.name}'s House</button>
         </div>
+    }
+
+    noEvent() {
+        this.setDialogue(<div>There is nothing important to see here.<br/></div>);
     }
 
     checkEventData() {
@@ -293,6 +468,7 @@ class Area extends Component {
             return this.getArea();
         } else {
             localStorage.setItem('eventData', '{}');
+            return this.getArea();
         }
     }
 
@@ -303,4 +479,5 @@ class Area extends Component {
 
 
 }
+
 export default Area;
