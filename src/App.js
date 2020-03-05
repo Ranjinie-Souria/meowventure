@@ -12,7 +12,6 @@ function getGame() {
   }
 
 }
-
 function App() {
 
     if (!('indexedDB' in window)) {

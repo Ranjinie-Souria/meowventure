@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Home from "./Home";
 
 class Area extends Component {
     constructor(props) {
@@ -10,6 +11,24 @@ class Area extends Component {
             area: area,
             eventData: eventData,
         };
+
+        this.getChildDialogue = this.getChildDialogue.bind(this)
+        this.getChildArea = this.getChildArea.bind(this)
+
+    }
+
+    getChildDialogue = (childData) => {
+        this.setDialogue(childData);
+
+    };
+    getChildArea = (childData) => {
+        this.resetDialogue();
+        this.setState({area: childData});
+        localStorage.setItem('area', childData);
+    };
+
+    noEvent() {
+        this.setDialogue(<div>There is nothing important to see here.<br/></div>);
     }
 
     resetDialogue() {
@@ -22,7 +41,7 @@ class Area extends Component {
                 <div className="dialogue">{dialogue}</div>
                 {this.getCloseButton()}
             </div>
-        })
+        });
     }
 
     getCloseButton() {
@@ -35,13 +54,25 @@ class Area extends Component {
         })
     }
 
+    getDialogue() {
+        if (this.state.dialogue !== '') {
+            return this.state.dialogue
+        } else {
+            return '';
+        }
+    }
+
     getArea() {
         const area = this.state.area;
         if (!area) {
             localStorage.setItem('area', 'home');
-            return this.home();
+            return <div className="home">{this.getDialogue()}<Home childDialogue={this.getChildDialogue}
+                                                                   childArea={this.getChildArea}
+                                                                   noEvent={this.noEvent}/></div>;
         } else if (area === 'home') {
-            return this.home();
+            return <div className="home">{this.getDialogue()}<Home childDialogue={this.getChildDialogue}
+                                                                   childArea={this.getChildArea}
+                                                                   noEvent={this.noEvent}/></div>;
         } else if (area === 'garden') {
             return this.garden();
         } else if (area === 'forest') {
@@ -57,45 +88,6 @@ class Area extends Component {
         this.setState({area: theArea});
     }
 
-    home() {
-        const self = this;
-
-        function bed() {
-            let count = 1;
-            self.setDialogue(<div>Your comfy bed, it smells just like you. <br/>Maybe you don't actually smell good but,
-                for some reason, <br/>
-                your bed is very appealing. Looking at it makes you want to take a nap.<br/>
-                <button onClick={() => nap()}>Take a little nap</button>
-            </div>);
-
-            function nap() {
-                if (count < 5) {
-                    count += 1;
-                    self.setDialogue(<div>Zzzz... Just 5 minutes. <br/>
-                        That's what you said after having {count} delicious hours of sleep. <br/>
-                        Do you want to sleep more ?
-                        <button onClick={() => nap()}>Sleep more</button></div>)
-                } else {
-                    self.setDialogue(<div>You took {count} hours of naps. I think that's enough. <br/>
-                        Don't you feel like going outside ? No ? Well that's up to you.</div>)
-                }
-            }
-        }
-
-        function exit() {
-            self.setDialogue(<div>The exit door. Do you want to leave your home ?<br/>
-                <button onClick={() => self.goToArea('garden')}>Leave home</button>
-            </div>);
-        }
-
-        return <div className="home">
-            {this.state.dialogue}
-            <button onClick={() => self.noEvent()}>Check the area</button>
-            <button onClick={() => bed()}>Bed</button>
-            <button onClick={() => exit()}>Door</button>
-
-        </div>
-    }
 
     events(data, value) {
         let event = this.state.eventData;
@@ -459,9 +451,6 @@ class Area extends Component {
         </div>
     }
 
-    noEvent() {
-        this.setDialogue(<div>There is nothing important to see here.<br/></div>);
-    }
 
     checkEventData() {
         if (this.state.eventData) {

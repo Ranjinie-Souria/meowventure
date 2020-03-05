@@ -156,6 +156,7 @@ label {
     bottom: 0;
     font-weight: bold;
     color: black;
+    text-shadow: darkslategrey 1px 0 0;
     font-family: "MS Gothic", source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
     border-radius: 30px;
     animation-name: dialogue;
@@ -180,13 +181,13 @@ label {
 }
 
 button {
-    background-color: black;
+    background-color: RGBA(0%, 0%, 0%, 1);
     border-radius: 3px;
     padding: 3px;
     margin: 5px;
     color: white;
     font-weight: bold;
-    border: black solid 1px;
+    border: RGBA(0%, 0%, 0%, 1) solid 1px;
 }
 
 button:hover {
@@ -214,7 +215,7 @@ button:hover {
     right: 0;
     text-align: center;
     font-size: 10px;
-    background-color: black;
+    background-color: darkslategrey;
     color: white;
 }
 
