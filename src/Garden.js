@@ -1,10 +1,6 @@
 import React from 'react';
 
 class Garden extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     events(data, value) {
         let event = this.props.eventData;
         this.props.childDialogue('');
@@ -43,8 +39,6 @@ class Garden extends React.Component {
     }
 
     exit() {
-        const self = this;
-        let event = JSON.parse(this.props.eventData);
         this.props.childDialogue(<div>This path leads to the forest. Cat City is not so far away from it. <br/>
             Do you want to leave your garden ?<br/>
             <button onClick={() => this.props.childArea('forest')}>Leave the garden</button>

@@ -19,7 +19,6 @@ class Forest extends Component {
 
     trees() {
         const self = this;
-        let event = JSON.parse(this.props.eventData);
         self.props.childDialogue(<div>As you look at the landscape, you can hear birds singing. <br/>
             The trees are very tall and you enjoy the sound of the wind playing with their leaves.<br/>
             It's a calming feeling but you don't have the time to look at the trees for hours.<br/> Or maybe you do
@@ -28,7 +27,6 @@ class Forest extends Component {
 
     stonePath() {
         const self = this;
-        let event = JSON.parse(this.props.eventData);
         self.props.childDialogue(<div>This path leads to Cat City. <br/>
             Do you want to leave the forest ?<br/>
             <button onClick={() => self.props.childArea('catcity')}>Go to Cat City</button>
@@ -38,7 +36,6 @@ class Forest extends Component {
     grassField() {
         const self = this;
         let event = JSON.parse(this.props.eventData);
-
 
         function talk() {
             if (event["Magimiu"] === 0) {
@@ -157,7 +154,7 @@ class Forest extends Component {
                                                     <button onClick={() =>
                                                         self.props.childDialogue(
                                                             <div>Yes. You are against any kind of physical abuse
-                                                                made to cake.<br/> Actually, you don't even like
+                                                                made to cakes.<br/> Actually, you don't even like
                                                                 chocolate.<br/>
                                                                 And chocolate is harmful for cats. Good
                                                                 decision, {self.props.name}.<br/>
@@ -265,9 +262,6 @@ class Forest extends Component {
 
     render() {
         const self = this;
-        let event = JSON.parse(this.props.eventData);
-
-        console.log(JSON.parse(this.props.eventData), event["Magimiu"]);
         return <div className="home">
             <button onClick={() => self.eventList()}>Check the area</button>
             <button onClick={() => self.props.childArea('garden')}>{self.props.name}'s House</button>
