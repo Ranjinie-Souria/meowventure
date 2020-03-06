@@ -3,12 +3,13 @@ import './cat.css';
 class CharacterSheet extends Component {
     constructor(props) {
         super(props);
+        const playerData = JSON.parse(localStorage.getItem('playerData'));
         this.state = {
             maxHP: 100,
             maxPW: 100,
-            currentHP: 100,
-            currentPW: 100,
-            money: 100,
+            currentHP: playerData["stats"][0],
+            currentPW: playerData["stats"][1],
+            money: playerData["stats"][2],
         }
     }
 
@@ -44,6 +45,7 @@ class CharacterSheet extends Component {
                 <div style={{width: this.state.currentPW + '%', backgroundColor: 'cyan'}}
                      className="barInside">{this.state.currentPW}/{this.state.maxPW}</div>
             </div>
+            <div className="money">{this.state.money}</div>
             {this.getCat(cat[0], cat[1])}
             <div className="chara2"><h3>{this.props.name}<br/>
                 {this.props.classe.toUpperCase()}, {this.props.gender}</h3></div>

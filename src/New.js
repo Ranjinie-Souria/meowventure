@@ -31,9 +31,11 @@ class New extends Component {
         newData["classe"] = classe;
         newData["gender"] = gender;
         newData["cat"] = [fur, eyes];
+        newData["stats"] = [100, 100, 100];
+        const leNom = newData["nom"];
         newData = JSON.stringify(newData);
         if (nom !== '') {
-            if (window.confirm('You will play as ' + nom + ', ' + gender + ', the ' + classe + '. Is that okay ? ')) {
+            if (window.confirm('You will play as ' + leNom + ', ' + gender + ', the ' + classe + '. Is that okay ? ')) {
                 if (!localStorage.getItem('playerData')) {
                     localStorage.setItem('playerData', newData);
                     event = {};
@@ -63,7 +65,7 @@ class New extends Component {
                 <div style={{background: eyes}} className="eye2 left"/>
                 <div style={{background: eyes}} className="eye2 right"/>
                 <div className="mouth"/>
-                <div style={{border: '7px solid ' + fur}} className="mouth2"/>
+                <div className="mouth2"/>
                 <div style={{borderLeft: '60px solid ' + fur}} className="ear left"/>
                 <div style={{borderRight: '60px solid ' + fur}} className="ear right"/>
             </div>

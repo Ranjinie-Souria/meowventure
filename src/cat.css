@@ -31,6 +31,7 @@
 .cat:hover .eye2.right {
     -webkit-transform: scale(2, 0.1);
     transform: scale(2, 0.1);
+    background-color: black;
 }
 
 .cat .ear {

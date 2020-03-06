@@ -52,7 +52,7 @@ code {
 
 .chara2 {
     position: relative;
-    bottom: 30px;
+    top: -200px;
     background-color: #282c34;
     box-shadow: black 2px 2px 2px;
 }
@@ -70,6 +70,20 @@ code {
     bottom: -0px;
     background-color: red;
     box-shadow: black inset 2px 2px 2px;
+}
+
+.money {
+    width: 50px;
+    height: 50px;
+    background: gold;
+    color: whitesmoke;
+    text-shadow: black 2px 2px 0;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 50%;
+    box-shadow: orange inset 4px -4px 1px;
+    border: 4px solid darkgoldenrod;
 }
 
 h3 {
