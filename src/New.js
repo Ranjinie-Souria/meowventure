@@ -32,6 +32,18 @@ class New extends Component {
         newData["gender"] = gender;
         newData["cat"] = [fur, eyes];
         newData["stats"] = [100, 100, 100];
+        newData["skills"] = {"Weapon": ["Attack with your weapon", 3, 0]};
+
+        if (classe === 'mage') {
+            newData["skills"]["Fireball"] = ["A little fireball, useful to heat food when you don't have a microwave", 15, 20];
+        } else if (classe === 'ranger') {
+            newData["skills"]["Arrow Rain"] = ["Can't use an umbrella to dodge this one", 8, 5];
+        } else if (classe === 'warrior') {
+            newData["skills"]["Slash"] = ["Cut cut cut ! You learnt it by making sushi", 10, 10];
+        } else if (classe === 'priest') {
+            newData["skills"]["Charm"] = ["Who doesn't love your paws ? +5 hp ", 5, 10, 5];
+        }
+
         const leNom = newData["nom"];
         newData = JSON.stringify(newData);
         if (nom !== '') {
