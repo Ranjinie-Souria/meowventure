@@ -59,8 +59,8 @@ class Area extends Component {
     setDialogue(dialogue) {
         this.setState({
             dialogue: <div>
-                <div className="dialogue">{dialogue}</div>
-                {this.getCloseButton()}
+                <div className="dialogue">{dialogue}
+                    {this.getCloseButton()}</div>
             </div>
         });
     }
