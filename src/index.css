@@ -52,9 +52,24 @@ code {
 
 .chara2 {
     position: relative;
-    bottom: -30px;
+    bottom: 30px;
     background-color: #282c34;
     box-shadow: black 2px 2px 2px;
+}
+
+.bar {
+    position: relative;
+    bottom: -0px;
+    background-color: #282c34;
+    width: 100%;
+    box-shadow: black 2px 2px 2px;
+}
+
+.barInside {
+    position: relative;
+    bottom: -0px;
+    background-color: red;
+    box-shadow: black inset 2px 2px 2px;
 }
 
 h3 {

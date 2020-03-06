@@ -18,12 +18,14 @@ class Game extends Component {
             <CharacterSheet
                 name={this.state.nom}
                 classe={this.state.classe}
-                gender={this.state.gender}/>;
-
-            <div className="main"><Area name={this.state.nom}
-                                        classe={this.state.classe}
-                                        gender={this.state.gender}/></div>
-
+                gender={this.state.gender}
+            />
+            <div className="main">
+                <Area name={this.state.nom}
+                      classe={this.state.classe}
+                      gender={this.state.gender}
+                />
+            </div>
         </div>
     }
 
