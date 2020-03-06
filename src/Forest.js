@@ -60,27 +60,35 @@ class Forest extends Component {
                                         <div>
                                             What ! Aren't you impressed ?!
 
-                                            <button onClick={
+                                            <button onClick={() =>
                                                 self.props.childDialogue(<div>You dab in front of her and leave her
                                                     speechless. <br/>
-                                                    Yeah, you weren't the favorite child when you were young.
+                                                    Yeah, you weren't the favorite child when you were young. <br/> You
+                                                    were about to leave when she suddently stops you.
                                                     <button
-                                                        onClick={self.props.childNpcDialogue("Magimiu", <div>Wait ! You
-                                                            said you were a {self.props.classe} !<br/>
-
+                                                        onClick={() => self.props.childNpcDialogue("Magimiu", <div>Wait
+                                                            ! You
+                                                            said you were a {self.props.classe} !<br/> Please meet me
+                                                            here very soon.
+                                                            I need to find people to join me ! <br/> I'll tell you about
+                                                            it later, I gotta go now !
+                                                            <button
+                                                                onClick={() => self.props.childDialogue(<div>You wanted
+                                                                    to ask her some questions but she left, leaving you
+                                                                    very confused.</div>)}>Next</button>
                                                         </div>)}>Next</button>
                                                 </div>)
 
                                             }>No, I don't care. I am a powerful {self.props.classe}.</button>
 
-                                            <button onClick={
+                                            <button onClick={() =>
                                                 self.props.childDialogue(<div>You proceed to clap, treating her like she
                                                     was a little kitten.<br/>
                                                     Actually, you have no idea how old she is. You don't even know your
                                                     age, nor your backstory.<br/>
                                                     Wait, have you lost your memory ? Are you okay, {self.props.name} ?
 
-                                                    <button onClick={self.props.childNpcDialogue("Magimiu",
+                                                    <button onClick={() => self.props.childNpcDialogue("Magimiu",
                                                         <div>You're so sweet haha ! Anyway, I gotta go now, see you
                                                             later !
                                                             <button
@@ -93,7 +101,7 @@ class Forest extends Component {
                                             }>Wah ! That's so cool a mage ! Incredible !
                                             </button>
 
-                                            <button onClick={
+                                            <button onClick={() =>
                                                 self.props.childDialogue(<div>You dab in front of her and leave her
                                                     speechless. <br/>
                                                     Yeah, you weren't the favorite child when you were young.</div>)
@@ -235,7 +243,6 @@ class Forest extends Component {
 
     grassPath() {
         const self = this;
-        let event = JSON.parse(this.props.eventData);
         self.props.childDialogue(<div>You have no idea where this path leads to. <br/>
             Actually, you aren't even sure that it's a path.<br/>
             <button onClick={() => self.grassField()}>Follow the grass path</button>

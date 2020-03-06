@@ -21,7 +21,6 @@ class CatCity extends Component {
         const self = this;
         let event = JSON.parse(this.props.eventData);
         if (event["Magimiu"] === 1) {
-
             self.props.childDialogue(<div>As you keep on walking, you recognize Magimiu. <br/> She looks at you,
                 excited.<br/>
 
@@ -129,13 +128,14 @@ class CatCity extends Component {
                 <button onClick={() => self.nextDia()}>Next</button>
             </div>);
         } else {
-            self.noEvent();
+            self.props.childDialogue(<div>There is nothing important to see here.<br/>
+            </div>);
         }
     }
 
     render() {
         return <div className="home">
-            <button onClick={this.eventList}>Check the area</button>
+            <button onClick={() => this.eventList()}>Check the area</button>
             <button onClick={() => this.props.childArea('forest')}>Forest near {this.props.name}'s House</button>
         </div>
     }
