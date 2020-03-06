@@ -8,6 +8,8 @@ class Battle extends React.Component {
             nom: playerData.nom,
             classe: playerData.classe,
             gender: playerData.gender,
+            hp: playerData.stats[0],
+            pw: playerData.stats[1],
 
         }
     }

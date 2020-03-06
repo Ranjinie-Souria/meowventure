@@ -68,7 +68,7 @@ code {
 .barInside {
     position: relative;
     bottom: -0px;
-    background-color: red;
+    background-color: crimson;
     box-shadow: black inset 2px 2px 2px;
 }
 

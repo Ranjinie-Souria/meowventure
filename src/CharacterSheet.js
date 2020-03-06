@@ -5,10 +5,8 @@ class CharacterSheet extends Component {
         super(props);
         const playerData = JSON.parse(localStorage.getItem('playerData'));
         this.state = {
-            maxHP: 100,
-            maxPW: 100,
-            currentHP: playerData["stats"][0],
-            currentPW: playerData["stats"][1],
+            HP: playerData["stats"][0],
+            PW: playerData["stats"][1],
             money: playerData["stats"][2],
         }
     }
@@ -38,12 +36,14 @@ class CharacterSheet extends Component {
         const cat = JSON.parse(localStorage.getItem('playerData')).cat;
         return <div className="chara">
             <div className="bar">
-                <div style={{width: this.state.currentHP + '%'}}
-                     className="barInside">{this.state.currentHP}/{this.state.maxHP}</div>
+                <div style={{width: this.state.HP + '%'}}
+                     className="barInside">{this.state.HP}/100
+                </div>
             </div>
             <div className="bar">
-                <div style={{width: this.state.currentPW + '%', backgroundColor: 'cyan'}}
-                     className="barInside">{this.state.currentPW}/{this.state.maxPW}</div>
+                <div style={{width: this.state.PW + '%', backgroundColor: 'aquamarine'}}
+                     className="barInside">{this.state.PW}/100
+                </div>
             </div>
             <div className="money">{this.state.money}</div>
             {this.getCat(cat[0], cat[1])}
