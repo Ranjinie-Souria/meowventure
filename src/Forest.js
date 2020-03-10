@@ -172,6 +172,16 @@ class Forest extends Component {
                                                                                     interested in your
                                                                                     paws.<br/> Good job !
 
+                                                                                    <button onClick={() =>
+                                                                                        self.props.childNpcDialogue("Magimiu",
+                                                                                            <div>
+                                                                                                You have... Interesting
+                                                                                                powers. Let's try
+                                                                                                something else. I will
+                                                                                                be your opponent !<br/>
+
+
+                                                                                            </div>)}>Next</button>
                                                                                 </div>)}>Next
                                                                         </button>
                                                                     </div>)}>Look at my paws.</button>
@@ -204,12 +214,28 @@ class Forest extends Component {
                                                                                                 What did you just
                                                                                                 say...?<br/>
                                                                                                 Uh. Anyway... Let's move
-                                                                                                on.
+                                                                                                on.<br/>
+                                                                                                Since you are soooo bad
+                                                                                                at fighting a cake, i
+                                                                                                will be your opponent
+                                                                                                !<br/>
+                                                                                                Let's fight ! And...
+                                                                                                Uuh. Please don't eat
+                                                                                                me...<br/>
+
                                                                                             </div>)}>Yes</button>
                                                                                     <button onClick={() =>
                                                                                         self.props.childNpcDialogue("Magimiu",
                                                                                             <div>
-                                                                                                Of course you don't !
+                                                                                                Of course you don't
+                                                                                                !<br/>
+                                                                                                Anyway, since you are
+                                                                                                soooo bad at fighting a
+                                                                                                cake, i will be your
+                                                                                                opponent !<br/>
+                                                                                                Let's fight !
+                                                                                                <br/>
+
                                                                                             </div>)}>No
                                                                                     </button>
 
