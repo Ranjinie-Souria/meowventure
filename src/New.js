@@ -32,18 +32,38 @@ class New extends Component {
         newData["gender"] = gender;
         newData["cat"] = [fur, eyes];
         newData["stats"] = [100, 100, 100];
-        newData["skills"] = {"Weapon": ["Attack with your weapon", 3, 0]};
+        newData["skills"] = [{
+            "name": "Weapon",
+            "desc": "Attack with your weapon",
+            "dmg": 3,
+            "cost": 0,
+            "effect": undefined
+        }];
 
+        let firstSkill = {"name": "", "desc": "", "dmg": "", "cost": "", "effect": undefined};
         if (classe === 'mage') {
-            newData["skills"]["Fireball"] = ["A little fireball, useful to heat food when you don't have a microwave", 15, 20];
+            firstSkill["name"] = "Fireball";
+            firstSkill["desc"] = "A little fireball, useful to heat food when you don't have a microwave";
+            firstSkill["dmg"] = 15;
+            firstSkill["cost"] = 20;
         } else if (classe === 'ranger') {
-            newData["skills"]["Arrow Rain"] = ["Can't use an umbrella to dodge this one", 8, 5];
+            firstSkill["name"] = "Arrow Rain";
+            firstSkill["desc"] = "Can't use an umbrella to dodge this one";
+            firstSkill["dmg"] = 8;
+            firstSkill["cost"] = 5;
         } else if (classe === 'warrior') {
-            newData["skills"]["Slash"] = ["Cut cut cut ! You learnt it by making sushi", 10, 10];
+            firstSkill["name"] = "Slash";
+            firstSkill["desc"] = "Cut cut cut ! You learnt it by making sushi";
+            firstSkill["dmg"] = 10;
+            firstSkill["cost"] = 10;
         } else if (classe === 'priest') {
-            newData["skills"]["Charm"] = ["Who doesn't love your paws ? +5 hp ", 5, 10, 5];
+            firstSkill["name"] = "Charm";
+            firstSkill["desc"] = "Who doesn't love your paws ?";
+            firstSkill["dmg"] = 5;
+            firstSkill["cost"] = 10;
+            firstSkill["effect"] = ["stun", 1];
         }
-
+        newData["skills"].push(firstSkill);
         const leNom = newData["nom"];
         newData = JSON.stringify(newData);
         if (nom !== '') {

@@ -3,6 +3,7 @@ import Home from "./Home";
 import Garden from "./Garden";
 import Forest from "./Forest";
 import CatCity from "./CatCity"
+import Battle from "./Battle";
 
 class Area extends Component {
     constructor(props) {
@@ -15,8 +16,8 @@ class Area extends Component {
             eventData: eventData,
         };
 
-        this.getChildDialogue = this.getChildDialogue.bind(this)
-        this.getChildArea = this.getChildArea.bind(this)
+        this.getChildDialogue = this.getChildDialogue.bind(this);
+        this.getChildArea = this.getChildArea.bind(this);
 
     }
 
@@ -124,6 +125,16 @@ class Area extends Component {
                                                                       classe={this.props.classe}
                                                                       gender={this.props.gender}
                                                                       noEvent={this.noEvent}/></div>;
+        } else if (area === 'battle') {
+            return <div className="home">{this.getDialogue()}<Battle childDialogue={this.getChildDialogue}
+                                                                     childNpcDialogue={this.getChildNpcDialogue}
+                                                                     eventData={this.state.eventData}
+                                                                     childArea={this.getChildArea}
+                                                                     childEvent={this.setChildEvent}
+                                                                     name={this.props.name}
+                                                                     classe={this.props.classe}
+                                                                     gender={this.props.gender}
+                                                                     noEvent={this.noEvent}/></div>;
         }
     }
 

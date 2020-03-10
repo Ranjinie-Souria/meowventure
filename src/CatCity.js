@@ -137,6 +137,7 @@ class CatCity extends Component {
         return <div className="home">
             <button onClick={() => this.eventList()}>Check the area</button>
             <button onClick={() => this.props.childArea('forest')}>Forest near {this.props.name}'s House</button>
+            <button onClick={() => this.props.childArea('battle')}>BATTLE</button>
         </div>
     }
 }
