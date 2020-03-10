@@ -4,6 +4,8 @@ class Battle extends React.Component {
     constructor(props) {
         super(props);
         const playerData = JSON.parse(localStorage.getItem('playerData'));
+        const npcData = JSON.parse(localStorage.getItem('currentBattle'));
+
         this.state = {
             nom: playerData.nom,
             classe: playerData.classe,
@@ -12,6 +14,10 @@ class Battle extends React.Component {
             pw: playerData.stats[1],
             skills: playerData.skills,
             turn: true,
+            npcName: npcData["name"],
+            npcSkills: npcData["skills"],
+            npcHp: npcData["hp"],
+            npcPw: npcData["pw"],
         }
     }
 
@@ -24,12 +30,16 @@ class Battle extends React.Component {
     statTurn() {
         let next = this.state.turn;
         if (next) {
-            return 'Player';
+            return this.state.nom;
         } else {
-            return 'Enemy';
+            return this.state.npcName;
         }
     }
 
+    skillDetails(skill) {
+        this.props.childDialogue(<div>{skill["name"]} : <br/><br/>{skill["desc"]}<br/><br/> Deals {skill["dmg"]} damage
+            and costs {skill["cost"]} power.</div>);
+    }
     getAction() {
         let skills = this.state.skills;
         let skillButtons = [];
@@ -38,30 +48,35 @@ class Battle extends React.Component {
                 <button
                     key={i}
                     onMouseOut={() => this.props.childDialogue("")}
-                    onMouseOver={(e) => this.skillDetails(skills[i])}
+                    onMouseOver={() => this.skillDetails(skills[i])}
                     onClick={() => this.useSkill(i)}>{skills[i]["name"]}
                 </button>);
         }
         return skillButtons;
     }
 
-    skillDetails(skill) {
-        this.props.childDialogue(<div>{skill["name"]} : <br/><br/>{skill["desc"]}<br/><br/> Deals {skill["dmg"]} damage
-            and costs {skill["cost"]} power.</div>);
-    }
-
     useSkill(i) {
         let skill = this.state.skills[i];
         this.nextTurn();
-        return console.log(skill);
     }
 
     render() {
         return (
             <div className="home">
                 <div className="headBattle"><h1>Battle</h1><h4>Turn : {this.statTurn()}</h4>
-                    <div className="btn-bt">{this.getAction()}</div>
+                    <div style={{width: '50%', left: '200px'}} className="bar">
+                        <div
+                            className="barInside">{this.state.npcHp}/{JSON.parse(localStorage.getItem('currentBattle'))["hp"]}</div
+                        >
+                    </div>
+                    <div className="bar" style={{width: '50%', left: '200px'}}>
+                        <div style={{backgroundColor: 'aquamarine'}}
+                             className="barInside">{this.state.npcPw}/{JSON.parse(localStorage.getItem('currentBattle'))["pw"]}
+                        </div>
+                    </div>
                 </div>
+                    <div className="btn-bt">{this.getAction()}</div>
+
             </div>);
     }
 

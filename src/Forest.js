@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 
 class Forest extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            npcData: JSON.parse(localStorage.getItem('npcData'))
+        }
+    }
     events(data, value) {
         let event = this.props.eventData;
         this.props.childDialogue('');
@@ -15,7 +20,6 @@ class Forest extends Component {
         localStorage.setItem('eventData', event);
         this.props.childEvent(event);
     }
-
 
     trees() {
         const self = this;
@@ -179,8 +183,12 @@ class Forest extends Component {
                                                                                                 powers. Let's try
                                                                                                 something else. I will
                                                                                                 be your opponent !<br/>
-
-
+                                                                                                {localStorage.setItem('currentBattle', JSON.stringify(this.state.npcData["Magimiu"]))}
+                                                                                                <br/>
+                                                                                                <button
+                                                                                                    onClick={() => this.props.childArea('battle')}
+                                                                                                >Fight
+                                                                                                </button>
                                                                                             </div>)}>Next</button>
                                                                                 </div>)}>Next
                                                                         </button>
@@ -222,7 +230,12 @@ class Forest extends Component {
                                                                                                 Let's fight ! And...
                                                                                                 Uuh. Please don't eat
                                                                                                 me...<br/>
-
+                                                                                                {localStorage.setItem('currentBattle', JSON.stringify(this.state.npcData["Magimiu"]))}
+                                                                                                <br/>
+                                                                                                <button
+                                                                                                    onClick={() => this.props.childArea('battle')}
+                                                                                                >Fight
+                                                                                                </button>
                                                                                             </div>)}>Yes</button>
                                                                                     <button onClick={() =>
                                                                                         self.props.childNpcDialogue("Magimiu",
@@ -234,8 +247,12 @@ class Forest extends Component {
                                                                                                 cake, i will be your
                                                                                                 opponent !<br/>
                                                                                                 Let's fight !
+                                                                                                {localStorage.setItem('currentBattle', JSON.stringify(this.state.npcData["Magimiu"]))}
                                                                                                 <br/>
-
+                                                                                                <button
+                                                                                                    onClick={() => this.props.childArea('battle')}
+                                                                                                >Fight
+                                                                                                </button>
                                                                                             </div>)}>No
                                                                                     </button>
 

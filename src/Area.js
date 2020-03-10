@@ -86,9 +86,11 @@ class Area extends Component {
 
     getArea() {
         const area = this.state.area;
+
         if (!area) {
             localStorage.setItem('area', 'home');
         }
+
         if (area === 'home' || !area) {
             return <div className="home">{this.getDialogue()}<Home childDialogue={this.getChildDialogue}
                                                                    childArea={this.getChildArea}
@@ -114,6 +116,7 @@ class Area extends Component {
                                                                      name={this.props.name}
                                                                      classe={this.props.classe}
                                                                      gender={this.props.gender}
+                                                                     battle={this.battle}
                                                                      noEvent={this.noEvent}/></div>;
         } else if (area === 'catcity') {
             return <div className="home">{this.getDialogue()}<CatCity childDialogue={this.getChildDialogue}
@@ -126,17 +129,18 @@ class Area extends Component {
                                                                       gender={this.props.gender}
                                                                       noEvent={this.noEvent}/></div>;
         } else if (area === 'battle') {
-            return <div className="home">{this.getDialogue()}<Battle childDialogue={this.getChildDialogue}
-                                                                     childNpcDialogue={this.getChildNpcDialogue}
-                                                                     eventData={this.state.eventData}
-                                                                     childArea={this.getChildArea}
-                                                                     childEvent={this.setChildEvent}
-                                                                     name={this.props.name}
-                                                                     classe={this.props.classe}
-                                                                     gender={this.props.gender}
-                                                                     noEvent={this.noEvent}/></div>;
+            return <div className="home"><Battle childDialogue={this.getChildDialogue}
+                                                 childNpcDialogue={this.getChildNpcDialogue}
+                                                 eventData={this.state.eventData}
+                                                 childArea={this.getChildArea}
+                                                 childEvent={this.setChildEvent}
+                                                 name={this.props.name}
+                                                 classe={this.props.classe}
+                                                 gender={this.props.gender}
+                                                 noEvent={this.noEvent}/></div>
         }
     }
+
 
     goToArea(theArea) {
         this.resetDialogue();

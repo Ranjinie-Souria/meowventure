@@ -10,7 +10,13 @@ function getGame() {
   else {
     return <New/>
   }
+}
 
+function checkNpcData() {
+    if (!localStorage.getItem('npcData')) {
+        localStorage.setItem('npcData', '{"Magimiu" : {"name" : "Magimiu","hp" : 100, "pw" : 100, "skills" : [["Fireball","15","30"]]},' +
+            '"Blob" : {"name" : "Jelly Blob","hp" : 20, "pw" : 0, "skills" : [["Blob !","3","0"]]}}');
+    }
 }
 function App() {
 
@@ -22,6 +28,7 @@ function App() {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
                 </header>
+                {checkNpcData()}
                 {getGame()}
             </div>);
     }
