@@ -43,12 +43,12 @@ class New extends Component {
         let firstSkill = {"name": "", "desc": "", "dmg": "", "cost": "", "effect": undefined};
         if (classe === 'mage') {
             firstSkill["name"] = "Fireball";
-            firstSkill["desc"] = "A little fireball, useful to heat food when you don't have a microwave";
+            firstSkill["desc"] = "A little fireball, useful to heat food when you don't have a microwave.";
             firstSkill["dmg"] = 15;
             firstSkill["cost"] = 20;
         } else if (classe === 'ranger') {
             firstSkill["name"] = "Arrow Rain";
-            firstSkill["desc"] = "Can't use an umbrella to dodge this one";
+            firstSkill["desc"] = "Can't use an umbrella to dodge this one.";
             firstSkill["dmg"] = 8;
             firstSkill["cost"] = 5;
         } else if (classe === 'warrior') {
@@ -58,12 +58,13 @@ class New extends Component {
             firstSkill["cost"] = 10;
         } else if (classe === 'priest') {
             firstSkill["name"] = "Charm";
-            firstSkill["desc"] = "Who doesn't love your paws ?";
+            firstSkill["desc"] = "Who doesn't love your paws ? Applies a stunning effect that skips your enemy's next turn.";
             firstSkill["dmg"] = 5;
             firstSkill["cost"] = 10;
             firstSkill["effect"] = ["stun", 1];
         }
         newData["skills"].push(firstSkill);
+
         const leNom = newData["nom"];
         newData = JSON.stringify(newData);
         if (nom !== '') {

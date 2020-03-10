@@ -255,6 +255,14 @@ button {
     border: RGBA(0%, 0%, 0%, 1) solid 1px;
 }
 
+.btn-bt {
+    position: absolute;
+    z-index: 10;
+    bottom: 5px;
+    right: 0;
+}
+
+
 button:hover {
     background-color: white;
     color: black;
