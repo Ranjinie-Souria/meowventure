@@ -37,7 +37,8 @@ class Battle extends React.Component {
     }
 
     skillDetails(skill) {
-        this.props.childDialogue(<div>{skill["name"]} : <br/><br/>{skill["desc"]}<br/><br/> Deals {skill["dmg"]} damage
+        let self = this;
+        self.props.childDialogue(<div>{skill["name"]} : <br/><br/>{skill["desc"]}<br/><br/> Deals {skill["dmg"]} damage
             and costs {skill["cost"]} power.</div>);
     }
     getAction() {
@@ -57,6 +58,18 @@ class Battle extends React.Component {
 
     useSkill(i) {
         let skill = this.state.skills[i];
+        let pw = this.state.pw;
+        let npcHp = this.state.npcHp;
+        const playerData = JSON.parse(localStorage.getItem('playerData'));
+        if (skill["cost"] <= pw) {
+            pw -= skill["cost"];
+            npcHp -= skill["dmg"];
+            playerData["stats"][1] = pw;
+        } else {
+            this.props.childDialogue("You don't have enough power to use this skill now !");
+        }
+        localStorage.setItem('playerData', JSON.stringify(playerData));
+        this.setState({pw: pw, npcHp: npcHp});
         this.nextTurn();
     }
 
@@ -65,12 +78,11 @@ class Battle extends React.Component {
             <div className="home">
                 <div className="headBattle"><h1>Battle</h1><h4>Turn : {this.statTurn()}</h4>
                     <div style={{width: '50%', left: '200px'}} className="bar">
-                        <div
-                            className="barInside">{this.state.npcHp}/{JSON.parse(localStorage.getItem('currentBattle'))["hp"]}</div
-                        >
+                        <div style={{width: this.state.npcHp + '%'}}
+                             className="barInside">{this.state.npcHp}/{JSON.parse(localStorage.getItem('currentBattle'))["hp"]}</div>
                     </div>
                     <div className="bar" style={{width: '50%', left: '200px'}}>
-                        <div style={{backgroundColor: 'aquamarine'}}
+                        <div style={{width: this.state.npcPw + '%', backgroundColor: 'aquamarine'}}
                              className="barInside">{this.state.npcPw}/{JSON.parse(localStorage.getItem('currentBattle'))["pw"]}
                         </div>
                     </div>
