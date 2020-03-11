@@ -1,16 +1,6 @@
 import React, {Component} from "react";
 import './cat.css';
 class CharacterSheet extends Component {
-    constructor(props) {
-        super(props);
-        const playerData = JSON.parse(localStorage.getItem('playerData'));
-        this.state = {
-            HP: playerData["stats"][0],
-            PW: playerData["stats"][1],
-            money: playerData["stats"][2],
-        }
-    }
-
     getCat(fur, eyes) {
         return (<div className="cat">
             <div style={{background: fur}} className="face">
@@ -36,16 +26,16 @@ class CharacterSheet extends Component {
         const cat = JSON.parse(localStorage.getItem('playerData')).cat;
         return <div className="chara">
             <div className="bar">
-                <div style={{width: this.state.HP + '%'}}
-                     className="barInside">{this.state.HP}/100
+                <div style={{width: this.props.hp + '%'}}
+                     className="barInside">{this.props.hp}/100
                 </div>
             </div>
             <div className="bar">
-                <div style={{width: this.state.PW + '%', backgroundColor: 'aquamarine'}}
-                     className="barInside">{this.state.PW}/100
+                <div style={{width: this.props.pw + '%', backgroundColor: 'aquamarine'}}
+                     className="barInside">{this.props.pw}/100
                 </div>
             </div>
-            <div className="money">{this.state.money}</div>
+            <div className="money">{this.props.money}</div>
             {this.getCat(cat[0], cat[1])}
             <div className="chara2"><h3>{this.props.name}<br/>
                 {this.props.classe.toUpperCase()}, {this.props.gender}</h3></div>

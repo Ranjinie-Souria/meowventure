@@ -10,6 +10,9 @@ class Game extends Component {
             nom: playerData.nom,
             classe: playerData.classe,
             gender: playerData.gender,
+            hp: playerData.stats[0],
+            pw: playerData.stats[1],
+            money: playerData.stats[2],
         };
     }
 
@@ -19,6 +22,9 @@ class Game extends Component {
                 name={this.state.nom}
                 classe={this.state.classe}
                 gender={this.state.gender}
+                hp={this.state.hp}
+                pw={this.state.pw}
+                money={this.state.money}
             />
             <div className="main">
                 <Area name={this.state.nom}

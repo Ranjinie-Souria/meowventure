@@ -67,13 +67,11 @@ class Area extends Component {
     }
 
     setSPDialogue = (childData) => {
-        if (childData !== '') {
             this.setState({
                 dialogue: <div>
                     <div className="dialogueSP">{childData}</div>
                 </div>
             });
-        }
     };
 
     getCloseButton() {
