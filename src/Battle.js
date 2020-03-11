@@ -148,7 +148,14 @@ class Battle extends React.Component {
 
     render() {
         return (
-            <div className="home">
+            <div className="home"><CharacterSheet
+                name={this.state.nom}
+                classe={this.state.classe}
+                gender={this.state.gender}
+                hp={this.state.hp}
+                pw={this.state.pw}
+                money={this.state.money}
+            />
                 <div className="headBattle"><h1>Battle</h1><h4>Turn : {this.statTurn()}</h4>
                     <div style={{width: '50%', left: '200px'}} className="bar">
                         <div style={{width: this.state.npcHp + '%'}}

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import './cat.css';
 class CharacterSheet extends Component {
+
+
     getCat(fur, eyes) {
         return (<div className="cat">
             <div style={{background: fur}} className="face">

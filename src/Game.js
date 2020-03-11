@@ -16,6 +16,7 @@ class Game extends Component {
         };
     }
 
+
     render() {
         return <div>
             <CharacterSheet
