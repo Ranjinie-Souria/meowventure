@@ -229,6 +229,25 @@ label {
     animation-duration: 500ms;
 }
 
+.dialogueSP {
+    position: absolute;
+    background-color: RGBA(30%, 30%, 30%, 0.5);
+    width: 100%;
+    z-index: 9;
+    height: 40%;
+    text-align: left;
+    padding: 30px;
+    font-size: 14px;
+    bottom: 0;
+    font-weight: bold;
+    color: black;
+    text-shadow: darkslategrey 1px 0 0;
+    font-family: "MS Gothic", source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    border-radius: 30px;
+    animation-name: dialogue;
+    animation-duration: 500ms;
+}
+
 .dialogueNPC {
     position: absolute;
     background-color: RGBA(50%, 0%, 30%, 0.5);

@@ -66,6 +66,16 @@ class Area extends Component {
         });
     }
 
+    setSPDialogue = (childData) => {
+        if (childData !== '') {
+            this.setState({
+                dialogue: <div>
+                    <div className="dialogueSP">{childData}</div>
+                </div>
+            });
+        }
+    };
+
     getCloseButton() {
         return <button className="dialogue-button" id="close" onClick={() => this.resetDialogue()}>X</button>;
     }
@@ -78,7 +88,7 @@ class Area extends Component {
 
     getDialogue() {
         if (this.state.dialogue !== '') {
-            return this.state.dialogue
+            return this.state.dialogue;
         } else {
             return '';
         }
@@ -129,15 +139,17 @@ class Area extends Component {
                                                                       gender={this.props.gender}
                                                                       noEvent={this.noEvent}/></div>;
         } else if (area === 'battle') {
-            return <div className="home"><Battle childDialogue={this.getChildDialogue}
-                                                 childNpcDialogue={this.getChildNpcDialogue}
-                                                 eventData={this.state.eventData}
-                                                 childArea={this.getChildArea}
-                                                 childEvent={this.setChildEvent}
-                                                 name={this.props.name}
-                                                 classe={this.props.classe}
-                                                 gender={this.props.gender}
-                                                 noEvent={this.noEvent}/></div>
+            return <div className="home">{this.getDialogue()}<Battle
+                childDialogue={this.getChildDialogue}
+                childNpcDialogue={this.getChildNpcDialogue}
+                eventData={this.state.eventData}
+                spDialogue={this.setSPDialogue}
+                childArea={this.getChildArea}
+                childEvent={this.setChildEvent}
+                name={this.props.name}
+                classe={this.props.classe}
+                gender={this.props.gender}
+                noEvent={this.noEvent}/></div>
         }
     }
 

@@ -5,7 +5,6 @@ class Battle extends React.Component {
         super(props);
         const playerData = JSON.parse(localStorage.getItem('playerData'));
         const npcData = JSON.parse(localStorage.getItem('currentBattle'));
-
         this.state = {
             nom: playerData.nom,
             classe: playerData.classe,
@@ -65,12 +64,22 @@ class Battle extends React.Component {
             pw -= skill["cost"];
             npcHp -= skill["dmg"];
             playerData["stats"][1] = pw;
+            localStorage.setItem('playerData', JSON.stringify(playerData));
+            this.setState({pw: pw, npcHp: npcHp});
+            this.nextTurn();
         } else {
             this.props.childDialogue("You don't have enough power to use this skill now !");
         }
-        localStorage.setItem('playerData', JSON.stringify(playerData));
-        this.setState({pw: pw, npcHp: npcHp});
-        this.nextTurn();
+    }
+
+    checkVictory() {
+        let result = '';
+        if (this.state.npcHp <= 0) {
+            result = 'You won the battle !'
+        } else if (this.state.hp <= 0) (
+            result = 'You lost the battle !'
+        );
+        this.props.childDialogue(result);
     }
 
     render() {
@@ -79,7 +88,8 @@ class Battle extends React.Component {
                 <div className="headBattle"><h1>Battle</h1><h4>Turn : {this.statTurn()}</h4>
                     <div style={{width: '50%', left: '200px'}} className="bar">
                         <div style={{width: this.state.npcHp + '%'}}
-                             className="barInside">{this.state.npcHp}/{JSON.parse(localStorage.getItem('currentBattle'))["hp"]}</div>
+                             className="barInside">{this.state.npcHp}/{JSON.parse(localStorage.getItem('currentBattle'))["hp"]}
+                        </div>
                     </div>
                     <div className="bar" style={{width: '50%', left: '200px'}}>
                         <div style={{width: this.state.npcPw + '%', backgroundColor: 'aquamarine'}}
@@ -87,11 +97,13 @@ class Battle extends React.Component {
                         </div>
                     </div>
                 </div>
-                    <div className="btn-bt">{this.getAction()}</div>
-
-            </div>);
+                {this.checkVictory()}
+                <div className="btn-bt">
+                    {this.getAction()}
+                </div>
+            </div>
+        );
     }
 
 }
-
 export default Battle;
