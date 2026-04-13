@@ -12,6 +12,8 @@ It is kept here as an archive of my early experiments with web development. It i
 This project is no longer in development.  
 It is preserved as-is for historical and educational purposes.
 
+Available at https://ranjinie-souria.github.io/meowventure/
+
 ## 💡 About
 
 Meowventure was an early attempt at building a browser-based game using React (Visual Novel style).
